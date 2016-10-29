@@ -1,20 +1,19 @@
 package ch.semafor.esta;
 
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import ch.semafor.esta.core.config.JpaConfig;
 import ch.semafor.esta.core.domain.Student;
-import ch.semafor.esta.core.repository.StudentJpaRepository;
+import ch.semafor.esta.core.repository.StudentRepository;
 
 public class App {
 
 	  public static void main(String[] args) {
-	    EntityManagerFactory emf = 
-	       Persistence.createEntityManagerFactory("esta-pu");
-	    StudentJpaRepository studentRepository = 
-	       new StudentJpaRepository();
-	    studentRepository.setEntityManager(
-	       emf.createEntityManager());
+		  ApplicationContext context =
+				   new AnnotationConfigApplicationContext(JpaConfig.class);
+				StudentRepository studentRepository = 
+				   (StudentRepository) context.getBean("studentRepository");
 
 	    Student stud = new Student();
 	    stud.setFirstname("firstname");

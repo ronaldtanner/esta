@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Student {
 	@Id@GeneratedValue
@@ -15,6 +17,7 @@ public class Student {
 	private String firstname;
 	private String lastname;
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
 	private Date birthdate;
 	
 	public Long getId() {

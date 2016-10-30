@@ -22,11 +22,11 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@Configuration
-@EnableTransactionManagement
-@ComponentScan(basePackages={"ch.semafor.esta.core.service"})
-@EnableJpaRepositories("ch.semafor.esta.core.repository")
-@PropertySource(value = { "classpath:application.properties" })
+//@Configuration
+//@EnableTransactionManagement
+//@ComponentScan(basePackages={"ch.semafor.esta.core.service"})
+//@EnableJpaRepositories("ch.semafor.esta.core.repository")
+//@PropertySource(value = { "classpath:application.properties" })
 public class JpaConfig {
 	@Autowired
 	Environment env;

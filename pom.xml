@@ -20,18 +20,11 @@
   <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.4.1.RELEASE</version>
+        <version>1.4.2.RELEASE</version>
   </parent>
   
 
   <dependencies>
-  <!-- 
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-devtools</artifactId>
-        <optional>true</optional>
-    </dependency>
-  -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -39,19 +32,12 @@
     </dependency>
   </dependencies>
 
-<build>
-    <plugins>
-        <plugin> <!-- create an executable JAR --> 
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-maven-plugin</artifactId>
-            <configuration>
-                <fork>true</fork>
-            </configuration>
-        </plugin>
-    </plugins>
-</build>
     
   <modules>
     <module>esta-core</module>
+      <module>esta-jqar</module>
+      <module>esta-jfx</module>
+      <module>esta-jsf</module>
+      <module>esta-vaadin</module>
   </modules>
 </project>

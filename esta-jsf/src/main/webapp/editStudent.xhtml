@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/template.xhtml">
+
+	<ui:define name="content">
+		<h:form id="edit_form">
+			<h:inputHidden value="#{studentController.student.id}" id="studentId" />
+
+			<p:panelGrid columns="2">
+
+				<p:outputLabel for="firstname" value="First name" />
+				<p:inputText id="firstname"
+					value="#{studentController.student.firstname}" required="true"
+					maxlength="40" />
+
+				<p:outputLabel for="lastname" value="Last name" />
+				<p:inputText id="lastname"
+					value="#{studentController.student.lastname}" required="true"
+					maxlength="40" />
+				<p:outputLabel for="birthdate" value="Birthdate" />
+				<p:calendar id="birthdate"
+					value="#{studentController.student.birthdate}" pattern="yyyy-MM-dd" />
+				<p:commandButton id="saveButton" value="Save"
+					action="#{studentController.save}" />
+
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

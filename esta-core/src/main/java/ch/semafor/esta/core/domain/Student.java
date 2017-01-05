@@ -19,7 +19,13 @@ public class Student {
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
 	private Date birthdate;
-	
+
+	public Student(){}
+	public Student(String first, String last, Date birthdate){
+		this.firstname = first;
+		this.lastname = last;
+		this.birthdate = birthdate;
+	}
 	public Long getId() {
 		return id;
 	}

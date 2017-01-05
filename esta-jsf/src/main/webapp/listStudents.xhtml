@@ -1,0 +1,40 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/template.xhtml">
+
+	<ui:define name="content">
+		<h:form>
+			<p:panelGrid columns="1">
+
+				<p:dataTable id="students" value="#{studentController.students}"
+					var="student" styleClass="table table-striped table-hover">
+					<p:column headerText="First Name">
+						<h:outputText value="#{student.firstname}" />
+					</p:column>
+
+					<p:column headerText="Last Name">
+						<h:outputText value="#{student.lastname}" />
+					</p:column>
+
+					<p:column headerText="Birthdate">
+						<h:outputText value="#{student.birthdate}" />
+					</p:column>
+
+					<p:column style="width:32px;text-align: center" >
+						<p:commandButton action="#{studentController.edit(student.id)}"
+							icon="ui-icon-pencil" title="Edit">
+						</p:commandButton>
+
+					</p:column>
+				</p:dataTable>
+				
+				<p:commandButton id="newButton" value="New Student"
+					action="#{studentController.edit(null)}" />
+			</p:panelGrid>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

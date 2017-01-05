@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>ESTA Application</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</h:head>
+<h:body>
+<p:layout id="main" fullPage="true">
+  <p:layoutUnit position="north" size="75">
+      <h:panelGroup>
+        <span style="font-size: 38px">ESTA</span>
+            easy student administration
+      </h:panelGroup>
+  </p:layoutUnit>
+      
+    <p:layoutUnit id="menu" position="west">
+      <h:form>
+        <p:menu>
+           <p:menuitem value="Students" outcome="listStudents" />
+           <p:menuitem value="Teachers" />
+           <p:menuitem value="Classes"  />
+        </p:menu>
+      </h:form>
+    </p:layoutUnit>
+ 
+    <p:layoutUnit id="content" position="center">
+      <f:view>
+        <ui:insert name="content">Main Content</ui:insert>
+      </f:view>
+    </p:layoutUnit>
+    
+    <p:layoutUnit style="text-align: right;" position="south" size="50">
+      <h:panelGroup>
+        <a href="#">Contact us</a> | <a href="#">Privacy</a> | <a href="#">About</a>
+      </h:panelGroup>
+    </p:layoutUnit>
+    
+</p:layout>
+
+</h:body>
+</html>

@@ -7,6 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 import ch.semafor.esta.core.domain.Student;
 import ch.semafor.esta.core.repository.StudentRepository;
 
+import java.util.List;
+
 @Service("studentService")
 @Transactional
 public class StudentServiceImpl implements StudentService{
@@ -19,4 +21,12 @@ public class StudentServiceImpl implements StudentService{
 		return studentRepository.save(student);
 	}
 
+	@Override
+	public Student findOne(Long id){
+		return studentRepository.findOne(id);
+	}
+	@Override
+	public List<Student> findAll(){
+		return studentRepository.findAll();
+	}
 }

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet"
+	  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet"
+          href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <link rel="stylesheet" type="text/css"
+          href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="http://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+
+  <script>
+    $(function() {
+        $( "#birthdate" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd",
+            maxDate:"-1Y"
+        });
+    });
+
+    $(document).ready(function(){
+    	$('#student-table').DataTable();
+    });
+
+  </script>
+</head>
+
+<body>
+<div class="container">
+<h2> ESTA Student Administration</h2>
+    <div class="panel-group">
+    <div id="save-student-panel" class="panel panel-primary">
+    <div class="panel-heading">Edit Student</div>
+    <div class="panel-body">
+        <form class="form-horizontal" th:object="${student}" th:action="@{/students}" method="post">
+            <input id="id" type="hidden" th:field="*{id}" />
+            <div class="form-group">
+                <label class="control-label col-sm-2" >First name:</label>
+                <div class="col-sm-8">
+                <input id="firstname" class="form-control"
+                       type="text" placeholder="Firstname" th:field="*{firstname}" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Last name:</label>
+                <div class="col-sm-8">
+                    <input id="lastname" type="text" class="form-control"
+                           placeholder="Lastname" th:field="*{lastname}" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Birthdate:</label>
+                <div class="col-sm-4">
+                <input id="birthdate" class="form-control"
+                       data-datepicker="" type="text" placeholder="Birthdate"
+                       th:field="*{birthdate}" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-ofset-2 col-sm-6">
+                    <button type="submit" class="btn btn-default">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div id="student-panel" class="panel panel-default">
+    <div class="panel-body">
+        <table id="student-table" class="display" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Birthdate</th>
+                <th />
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="stud : ${students}">
+                <td th:text="${stud.firstname}">Firstname</td>
+                <td th:text="${stud.lastname}">Lastname</td>
+                <td th:text="${stud.birthdate}">Birthdate</td>
+                <td> <a th:href="@{/students/}+${stud.id}">Edit</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+</div>
+    </div>
+</body>
+</html>

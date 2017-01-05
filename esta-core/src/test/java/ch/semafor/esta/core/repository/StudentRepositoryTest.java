@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.TestPropertySource;
@@ -26,7 +27,8 @@ import ch.semafor.esta.core.domain.Student;
 @Transactional
 @SpringBootTest
 @RunWith(SpringRunner.class)
-@TestPropertySource(value="classpath:hibernate-test.properties")
+//@TestPropertySource(value="classpath:hibernate-test.properties")
+@DataJpaTest
 @TestExecutionListeners({
     TransactionalTestExecutionListener.class, 
     DirtiesContextTestExecutionListener.class,

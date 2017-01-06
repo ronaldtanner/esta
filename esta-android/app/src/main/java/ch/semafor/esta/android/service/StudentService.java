@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import ch.semafor.esta.android.domain.Student;
 
@@ -17,10 +18,9 @@ public class StudentService {
 
     // Singleton pattern
     private static StudentService ourInstance = new StudentService();
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
 
     // The list of example students which gets used in case no connection to the data could be established
-    List<Student> exampleStudents = new ArrayList<Student>(Arrays.asList(
+    private List<Student> exampleStudents = new ArrayList<Student>(Arrays.asList(
             new Student("Max", "Muster", null),
             new Student("Matt", "Stauch", null),
             new Student("Adam", "Woods", null),
@@ -37,6 +37,7 @@ public class StudentService {
             s.setId(i);
             try {
                 // Sets the Birthdate to the 1Xth of May 1994
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd", Locale.getDefault());
                 s.setBirthdate(dateFormat.parse("1994-04-1" + i));
             } catch (ParseException e) {
                 e.printStackTrace();

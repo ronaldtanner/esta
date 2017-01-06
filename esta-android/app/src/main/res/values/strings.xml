@@ -5,7 +5,7 @@
     <string name="refreshButton">Refresh</string>
     <string name="saveButton">Save</string>
 
-    <string name="firstnameString">Vorname</string>
-    <string name="lastnameString">Nachname</string>
-    <string name="birthdateString">Geburtsdatum</string>
+    <string name="firstnameString">Firstname</string>
+    <string name="lastnameString">Lastname</string>
+    <string name="birthdateString">BirthDate</string>
 </resources>

@@ -5,13 +5,25 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
+
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import ch.semafor.esta.R;
 import ch.semafor.esta.android.adapter.StudentListAdapter;
+import ch.semafor.esta.android.domain.Student;
 import ch.semafor.esta.android.service.StudentService;
 
 public class MainActivity extends AppCompatActivity {
+
+    /**
+     * The Id of the student you are currently editing
+     * <p>
+     * If it's set to -1 it means that a new Student is being added
+     */
+    private long idOfCurrentStudent = -1;
 
     /**
      * This OnItemClickListener gets called every time you click an item in the listView
@@ -19,7 +31,23 @@ public class MainActivity extends AppCompatActivity {
     private AdapterView.OnItemClickListener listItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            // TODO: Implement this method
+
+            // Get the listAdapter
+            StudentListAdapter listAdapter = (StudentListAdapter) parent.getAdapter();
+
+            Student student = listAdapter.getStudents().get(position);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd", Locale.getDefault());
+
+            EditText firstnameText = (EditText) findViewById(R.id.firstnameText);
+            EditText lastnameText = (EditText) findViewById(R.id.lastnameText);
+            EditText birthdateText = (EditText) findViewById(R.id.birthdateText);
+
+            // Set the contents of the textFields
+            firstnameText.setText(student.getFirstname());
+            lastnameText.setText(student.getLastname());
+            birthdateText.setText(dateFormat.format(student.getBirthdate()));
+            idOfCurrentStudent = student.getId();
+
         }
     };
 

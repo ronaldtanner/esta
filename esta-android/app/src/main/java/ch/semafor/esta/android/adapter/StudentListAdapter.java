@@ -58,4 +58,13 @@ public class StudentListAdapter extends ArrayAdapter<Student> {
 
         return linearView;
     }
+
+    /**
+     * Get the list of students currently saved
+     *
+     * @return The list of students
+     */
+    public List<Student> getStudents() {
+        return students;
+    }
 }

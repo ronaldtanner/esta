@@ -7,7 +7,9 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
@@ -65,14 +67,14 @@ public class MainActivity extends AppCompatActivity {
 
         // Tells the listView what object to call to when an item gets clicked
         listView.setOnItemClickListener(listItemClickListener);
-        addStudentsToList();
+        refreshList();
 
     }
 
     /**
      * Adds all the students to the ListView
      */
-    private void addStudentsToList() {
+    private void refreshList() {
         // Creates the ListAdapter with all students in it
         StudentListAdapter students = new StudentListAdapter(getApplicationContext(),
                 StudentService.getInstance().getAllStudents());
@@ -86,9 +88,83 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Clears all the input fields
+     */
+    private void clearFields() {
+        // Sets the id to -1 so that it knows that it needs a new student
+        idOfCurrentStudent = -1;
+
+        EditText firstnameText = (EditText) findViewById(R.id.firstnameText);
+        EditText lastnameText = (EditText) findViewById(R.id.lastnameText);
+        EditText birthdateText = (EditText) findViewById(R.id.birthdateText);
+
+        firstnameText.setText("");
+        lastnameText.setText("");
+        birthdateText.setText("");
+    }
+    /**
      * Gets called when the 'refresh' button is pressed
      */
     public void onRefresh(View view) {
-        addStudentsToList();
+        refreshList();
+    }
+
+
+    /**
+     * Gets called when the 'new' button is pressed
+     */
+    public void onNew(View view) {
+        clearFields();
+    }
+
+    /**
+     * Saves the Current student.
+     *
+     * It gets saved as a new one if idOfCurrentStudent = -1
+     */
+    public void onSave(View view) {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd", Locale.getDefault());
+
+        EditText firstnameText = (EditText) findViewById(R.id.firstnameText);
+        EditText lastnameText = (EditText) findViewById(R.id.lastnameText);
+        EditText birthdateText = (EditText) findViewById(R.id.birthdateText);
+
+        // Checks if the firstname or lastname Fields are empty
+        if(firstnameText.getText().toString().length() < 1 ||
+                lastnameText.getText().toString().length() < 1) {
+            Toast.makeText(getApplicationContext(),
+                    getString(R.string.notAllFieldsFilledString),
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        // Creates the Student with an empty birthdate which gets added later
+        Student s = new Student(
+                firstnameText.getText().toString(),
+                lastnameText.getText().toString(),
+                null);
+
+        try {
+            s.setBirthdate(dateFormat.parse(birthdateText.getText().toString()));
+        } catch (ParseException e) {
+            // Shows an error Toast if any problems occur while parsing the birthdate
+            // Any problem that might occur during parsing likely was due to invalid input by the user
+            Toast.makeText(getApplicationContext(),
+                    getString(R.string.invalidBirthdateString),
+                    Toast.LENGTH_LONG).show();
+            // Make the method return to prevent any faulty data from being saved
+            return;
+        }
+
+        // If the id is < 0 then add a new student
+        if(idOfCurrentStudent < 0) {
+            StudentService.getInstance().addStudent(s);
+        } else {
+            s.setId(idOfCurrentStudent);
+            StudentService.getInstance().updateStudent(s, idOfCurrentStudent);
+        }
+        refreshList();
+        clearFields();
     }
 }

@@ -2,7 +2,7 @@ package ch.semafor.esta.android.domain;
 
 import java.util.Date;
 
-public class Student {
+public class Student implements Comparable<Student> {
 
     private Long id;
     private String firstname;
@@ -50,4 +50,8 @@ public class Student {
         this.birthdate = birthdate;
     }
 
+    @Override
+    public int compareTo(Student o) {
+        return (int) (this.getId() - o.getId());
+    }
 }

@@ -8,4 +8,6 @@
     <string name="firstnameString">Firstname</string>
     <string name="lastnameString">Lastname</string>
     <string name="birthdateString">BirthDate</string>
+    <string name="invalidBirthdateString">Invalid Date format. Please use YYYY-MM-DD</string>
+    <string name="notAllFieldsFilledString">Please fill out all fields</string>
 </resources>

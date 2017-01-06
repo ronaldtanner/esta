@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
@@ -99,11 +101,22 @@ public class StudentService {
      *
      * @param s The student to add
      */
-    public void addStudents(Student s) {
+    public void addStudent(Student s) {
         if (checkDatabaseConnection()) {
             // TODO: Implement functionality for adding students to the Database
         } else {
+            s.setId((long) exampleStudents.size());
             exampleStudents.add(s);
+        }
+    }
+
+    public void updateStudent(Student s, long id) {
+        if (checkDatabaseConnection()) {
+            // TODO: Implement functionality for adding students to the Database
+        } else {
+            exampleStudents.remove(getStudentById(id));
+            exampleStudents.add(s);
+            Collections.sort(exampleStudents);
         }
     }
 

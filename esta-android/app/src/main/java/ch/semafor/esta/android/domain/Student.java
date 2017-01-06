@@ -1,16 +1,20 @@
 package ch.semafor.esta.android.domain;
 
+import android.support.annotation.NonNull;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class Student implements Comparable<Student> {
 
-    private Long id;
+    private String href;
     private String firstname;
     private String lastname;
     private Date birthdate;
-
-    public Student() {
-    }
 
     public Student(String first, String last, Date birthdate) {
         this.firstname = first;
@@ -18,28 +22,12 @@ public class Student implements Comparable<Student> {
         this.birthdate = birthdate;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getFirstname() {
         return firstname;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
     public String getLastname() {
         return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
     }
 
     public Date getBirthdate() {
@@ -50,8 +38,25 @@ public class Student implements Comparable<Student> {
         this.birthdate = birthdate;
     }
 
+    public String getHref() {
+        return href;
+    }
+
+    public void setHref(String href) {
+        this.href = href;
+    }
+
+    public JSONObject toJSONObject() throws JSONException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd", Locale.getDefault());
+        JSONObject obj = new JSONObject();
+        obj.put("firstname", this.firstname);
+        obj.put("lastname", this.lastname);
+        obj.put("birthdate", dateFormat.format(this.birthdate));
+        return obj;
+    }
+
     @Override
-    public int compareTo(Student o) {
-        return (int) (this.getId() - o.getId());
+    public int compareTo(@NonNull Student o) {
+        return this.href.compareTo(o.getHref());
     }
 }

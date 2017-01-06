@@ -21,11 +21,11 @@ import ch.semafor.esta.android.service.StudentService;
 public class MainActivity extends AppCompatActivity {
 
     /**
-     * The Id of the student you are currently editing
+     * The href of the student you are currently editing
      * <p>
-     * If it's set to -1 it means that a new Student is being added
+     * If it's set to "" it means that a new Student is being added
      */
-    private long idOfCurrentStudent = -1;
+    private String hrefOfCurrentStudent = "";
 
     /**
      * This OnItemClickListener gets called every time you click an item in the listView
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
             firstnameText.setText(student.getFirstname());
             lastnameText.setText(student.getLastname());
             birthdateText.setText(dateFormat.format(student.getBirthdate()));
-            idOfCurrentStudent = student.getId();
+            hrefOfCurrentStudent = student.getHref();
 
         }
     };
@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(R.layout.activity_main);
-
 
         ListView listView = (ListView) findViewById(R.id.list);
 
@@ -77,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
     private void refreshList() {
         // Creates the ListAdapter with all students in it
         StudentListAdapter students = new StudentListAdapter(getApplicationContext(),
-                StudentService.getInstance().getAllStudents());
+                StudentService.getInstance().getAllStudents(getApplicationContext()));
 
         // Gets the listView
         ListView listView = (ListView) findViewById(R.id.list);
@@ -91,8 +90,8 @@ public class MainActivity extends AppCompatActivity {
      * Clears all the input fields
      */
     private void clearFields() {
-        // Sets the id to -1 so that it knows that it needs a new student
-        idOfCurrentStudent = -1;
+        // Sets the href to "" so that it knows that it needs a new student
+        hrefOfCurrentStudent = "";
 
         EditText firstnameText = (EditText) findViewById(R.id.firstnameText);
         EditText lastnameText = (EditText) findViewById(R.id.lastnameText);
@@ -102,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
         lastnameText.setText("");
         birthdateText.setText("");
     }
+
     /**
      * Gets called when the 'refresh' button is pressed
      */
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Saves the Current student.
-     *
+     * <p>
      * It gets saved as a new one if idOfCurrentStudent = -1
      */
     public void onSave(View view) {
@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         EditText birthdateText = (EditText) findViewById(R.id.birthdateText);
 
         // Checks if the firstname or lastname Fields are empty
-        if(firstnameText.getText().toString().length() < 1 ||
+        if (firstnameText.getText().toString().length() < 1 ||
                 lastnameText.getText().toString().length() < 1) {
             Toast.makeText(getApplicationContext(),
                     getString(R.string.notAllFieldsFilledString),
@@ -157,12 +157,12 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        // If the id is < 0 then add a new student
-        if(idOfCurrentStudent < 0) {
-            StudentService.getInstance().addStudent(s);
+        // If the href length is < 1 then add a new student
+        if (hrefOfCurrentStudent.length() < 1) {
+            StudentService.getInstance().addStudent(s, getApplicationContext());
         } else {
-            s.setId(idOfCurrentStudent);
-            StudentService.getInstance().updateStudent(s, idOfCurrentStudent);
+            s.setHref(hrefOfCurrentStudent);
+            StudentService.getInstance().updateStudent(s, getApplicationContext());
         }
         refreshList();
         clearFields();

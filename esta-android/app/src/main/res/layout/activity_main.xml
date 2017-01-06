@@ -25,8 +25,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:text="@string/newButton"
-        android:onClick="onNew" />
+        android:onClick="onNew"
+        android:text="@string/newButton" />
 
     <EditText
         android:id="@+id/firstnameText"
@@ -76,8 +76,8 @@
         android:layout_marginStart="45dp"
         android:layout_toEndOf="@+id/lastnameText"
         android:layout_toRightOf="@+id/lastnameText"
-        android:text="@string/saveButton"
-        android:onClick="onSave" />
+        android:onClick="onSave"
+        android:text="@string/saveButton" />
 
     <ListView
         android:id="@+id/list"

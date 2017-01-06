@@ -41,7 +41,13 @@ public class StudentListAdapter extends ArrayAdapter<Student> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View linearView = inflater.inflate(R.layout.list_view, parent, false);
+        View linearView;
+
+        if(convertView == null) {
+            linearView = inflater.inflate(R.layout.list_view, parent, false);
+        } else {
+            linearView = convertView;
+        }
 
         // Get all the textViews
         TextView firstnameText = (TextView) linearView.findViewById(R.id.firstnameTextInList);

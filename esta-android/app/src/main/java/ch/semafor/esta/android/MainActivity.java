@@ -8,6 +8,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import ch.semafor.esta.R;
+import ch.semafor.esta.android.adapter.StudentListAdapter;
+import ch.semafor.esta.android.service.StudentService;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,16 +32,35 @@ public class MainActivity extends AppCompatActivity {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(R.layout.activity_main);
 
+
         ListView listView = (ListView) findViewById(R.id.list);
 
         // Tells the listView what object to call to when an item gets clicked
         listView.setOnItemClickListener(listItemClickListener);
+        addStudentsToList();
+
+    }
+
+    /**
+     * Adds all the students to the ListView
+     */
+    private void addStudentsToList() {
+        // Creates the ListAdapter with all students in it
+        StudentListAdapter students = new StudentListAdapter(getApplicationContext(),
+                StudentService.getInstance().getAllStudents());
+
+        // Gets the listView
+        ListView listView = (ListView) findViewById(R.id.list);
+
+        // Gives it the adapter
+        listView.setAdapter(students);
+
     }
 
     /**
      * Gets called when the 'refresh' button is pressed
      */
     public void onRefresh(View view) {
-
+        addStudentsToList();
     }
 }

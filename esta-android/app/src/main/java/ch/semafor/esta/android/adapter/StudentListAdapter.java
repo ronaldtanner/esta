@@ -43,7 +43,7 @@ public class StudentListAdapter extends ArrayAdapter<Student> {
 
         View linearView;
 
-        if(convertView == null) {
+        if (convertView == null) {
             linearView = inflater.inflate(R.layout.list_view, parent, false);
         } else {
             linearView = convertView;

@@ -33,7 +33,7 @@ public class StudentService {
     public List<Student> getAllStudents(Context context) {
         try {
 
-            NetworkOperation operation = new NetworkOperation(context);
+            NetworkOperation operation = NetworkOperation.create(context);
             return operation.execute(new NetworkOperationParameter(NetworkOperationParameter.GET,
                     null)).get();
         } catch (InterruptedException | ExecutionException e) {
@@ -49,7 +49,7 @@ public class StudentService {
      */
     public void addStudent(Student s, Context context) {
         // Creates and executes the operation
-        NetworkOperation operation = new NetworkOperation(context);
+        NetworkOperation operation = NetworkOperation.create(context);
         operation.execute(new NetworkOperationParameter(NetworkOperationParameter.POST, s));
     }
 
@@ -60,7 +60,7 @@ public class StudentService {
      */
     public void updateStudent(Student s, Context context) {
         // Creates and executes the operation
-        NetworkOperation operation = new NetworkOperation(context);
+        NetworkOperation operation = NetworkOperation.create(context);
         operation.execute(new NetworkOperationParameter(NetworkOperationParameter.PUT, s));
     }
 }

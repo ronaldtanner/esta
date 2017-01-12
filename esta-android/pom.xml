@@ -19,16 +19,31 @@
                 <version>1.0.8</version>
                 <configuration>
                     <gradleVersion>2.14.1</gradleVersion>
-                    <tasks>
-                        <task>build</task>
-                    </tasks>
                 </configuration>
                 <executions>
                     <execution>
+                        <id>build</id>
                         <phase>compile</phase>
                         <goals>
                             <goal>invoke</goal>
                         </goals>
+                        <configuration>
+                            <tasks>
+                                <task>build</task>
+                            </tasks>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>invoke</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <task>clean</task>
+                            </tasks>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

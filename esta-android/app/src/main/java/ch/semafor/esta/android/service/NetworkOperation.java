@@ -27,7 +27,7 @@ import ch.semafor.esta.android.domain.Student;
 /**
  * Helper Class to perform a network Operation on Esta
  */
-class NetworkOperation extends AsyncTask<NetworkOperationParameter, Integer, List<Student>> {
+public class NetworkOperation extends AsyncTask<NetworkOperationParameter, Integer, List<Student>> {
 
     private final Context context;
 
@@ -36,8 +36,12 @@ class NetworkOperation extends AsyncTask<NetworkOperationParameter, Integer, Lis
      *
      * @param context Current application Context
      */
-    NetworkOperation(Context context) {
+    private NetworkOperation(Context context) {
         this.context = context;
+    }
+
+    public static NetworkOperation create(Context context) {
+        return new NetworkOperation(context);
     }
 
     /**
